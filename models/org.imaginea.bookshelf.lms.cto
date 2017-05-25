@@ -1,0 +1,79 @@
+/**
+* LMS Business network definition
+*/
+
+namespace org.imaginea.bookshelf.lms
+
+enum BookState {
+  o AVAILABLE
+  o BORROWED
+  o OVERDUE
+  o LOST
+  o REMOVED
+}
+
+enum MemberStatus {
+  o ACTIVE
+  o INACTIVE
+}
+
+abstract participant LibraryMember identified by email {
+  o String email
+  o String name
+  o MemberStatus status
+  o DateTime dateAdded
+}
+
+participant BookOwner extends LibraryMember {   
+
+  }
+
+participant BookBorrower extends LibraryMember {
+
+  }
+
+asset Book identified by isbn {
+  o String isbn
+  o Integer id
+  o String title
+  o String author
+  o String publisher
+  o DateTime dateIssued
+  o DateTime dateAdded
+  o String imageURL
+  o String description
+  o String genre
+  o Integer avgRating
+  o Integer totalRating
+  o Integer reviewersCount
+  --> BookOwner bookOwner
+  --> BookBorrower bookBorrower optional
+}
+
+transaction UpdateOwner identified by transactionID {
+  o String transactionID
+  --> BookOwner newOwner
+  --> Book newBook
+}
+
+transaction BorrowBook identified by transactionID {
+  o String transactionID
+  --> BookBorrower newBorrower
+  --> Book book
+}
+
+transaction ReturnBook identified by transactionID {
+  o String transactionID
+  --> BookOwner bookOwner
+  --> Book book
+}
+
+transaction GetParticipant identified by transactionID {
+  o String transactionID
+  o String email
+}
+
+transaction GetAsset identified by transactionID {
+  o String transactionID
+  o String isbn
+}

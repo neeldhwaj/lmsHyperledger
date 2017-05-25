@@ -1,0 +1,7 @@
+rule Member {
+    description: "Allow the member ALL access to Book"
+    participant: "org.imaginea.bookshelf.lms"
+    operation: ALL
+    resource: "org.imaginea.bookshelf.lms.Book"
+    action: ALLOW
+}
