@@ -3,7 +3,7 @@
 # compiled output
 /dist
 /tmp
-
+/crypto-config
 # dependencies
 /node_modules
 
@@ -38,3 +38,4 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+docker-compose.yml~
